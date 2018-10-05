@@ -8,6 +8,7 @@ body, div#page-inner {  /* Will not work on IE if body is ommitted */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: lightgrey;
 }
 
 div#content {
