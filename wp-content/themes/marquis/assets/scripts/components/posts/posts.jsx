@@ -48,7 +48,7 @@ class Posts extends React.Component {
 
     this.setState({ page: this.state.page + 1 });
 
-    fetch(CelestialSettings.URL.api + "posts/?page=" + this.state.page)
+    fetch(MarquisSettings.URL.api + "posts/?page=" + this.state.page)
       .then(function(response) {
         for (var pair of response.headers.entries()) {
           // getting the total number of pages

@@ -16,13 +16,13 @@ class Gallery extends React.Component {
         var url = window.location.href.split('/');
         var slug = url.pop() || url.pop();
 
-        fetch(CelestialSettings.URL.api + "gallery/?page=" + this.state.page)
+        fetch(MarquisSettings.URL.api + "gallery/?page=" + this.state.page)
             .then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                console.log(reponse);
-                //return response.json();
+                //console.log(reponse);
+                return response.json();
             })
             .then(function (res) {
                 that.setState({ product: res[0] })

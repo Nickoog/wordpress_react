@@ -6,8 +6,8 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Posts from './components/posts/posts';
 import Post from './components/posts/post';
-import Products from './components/gallery/galleries';
-import Product from './components/gallery/gallery';
+import Galleries from './components/gallery/Galleries';
+import Gallery from './components/gallery/Gallery';
 import NotFound from './components/not-found';
 import Page from './components/page';
 import LoadingIcon from './loading-icon.gif';
@@ -21,11 +21,11 @@ const App = () => (
         <Header />
         <div id="content">
             <Switch>
-                <Route exact path={CelestialSettings.path} component={Posts} />
-                <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
-                <Route exact path={CelestialSettings.path + 'products'} component={Products} />
-                <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
-                <Route exact path={CelestialSettings.path + ':slug'} component={Page} />
+                <Route exact path={MarquisSettings.path} component={Posts} />
+                <Route exact path={MarquisSettings.path + 'posts/:slug'} component={Post} />
+                <Route exact path={MarquisSettings.path + 'galleries'} component={Galleries} />
+                <Route exact path={MarquisSettings.path + 'gallery/:slug'} component={Gallery} />
+                <Route exact path={MarquisSettings.path + ':slug'} component={Page} />
                 {/* <Route path="*" component={NotFound} /> */}
             </Switch>
         </div>
