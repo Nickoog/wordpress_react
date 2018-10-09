@@ -25,7 +25,7 @@ if (!dev) {
 
 let config = {
   entry: {
-    app: ['./assets/styles/style.scss','./assets/scripts/index.jsx']
+    app: ['./assets/styles/main.scss','./assets/scripts/index.jsx']
   },
   watch: dev? true : false, 
   output: {

@@ -21,8 +21,8 @@
     <body <?php body_class(); ?>>
         <div id="page" class="hfeed site">
             <div id="content">
-                <div class="loader-gif">
-                    <img src="<?php echo home_url() ?>/wp-content/themes/marquis/dist/images/loading-icon.gif" alt="Loader">
+                <div class="loader-wrapper">
+                    <i className='fa fa-spinner fa-pulse fa-5x fa-fw'></i>
                 </div>
             </div>
             <?php wp_footer(); ?>

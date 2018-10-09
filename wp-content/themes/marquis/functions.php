@@ -5,6 +5,11 @@
  *
  * @since Marquis 1.0
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function marquis_scripts() {
 
 	// Load our main stylesheet.

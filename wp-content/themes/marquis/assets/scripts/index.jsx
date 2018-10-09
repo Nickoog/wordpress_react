@@ -24,7 +24,7 @@ const App = () => (
                 <Route exact path={MarquisSettings.path} component={Posts} />
                 <Route exact path={MarquisSettings.path + 'posts/:slug'} component={Post} />
                 <Route exact path={MarquisSettings.path + 'galleries'} component={Galleries} />
-                <Route exact path={MarquisSettings.path + 'gallery/:slug'} component={Gallery} />
+                <Route exact path={MarquisSettings.path + 'galleries/:slug'} component={Gallery} />
                 <Route exact path={MarquisSettings.path + ':slug'} component={Page} />
                 {/* <Route path="*" component={NotFound} /> */}
             </Switch>

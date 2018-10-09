@@ -7,7 +7,7 @@ class Gallery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: {}
+            gallery: {}
         }
     }
 
@@ -25,7 +25,7 @@ class Gallery extends React.Component {
                 return response.json();
             })
             .then(function (res) {
-                that.setState({ product: res[0] })
+                that.setState({ gallery: res[0] })
             });
     }
 
