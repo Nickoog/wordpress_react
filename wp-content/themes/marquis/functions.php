@@ -92,9 +92,10 @@ function marquis_get_image_src( $object, $field_name, $request ) {
     if($object[ 'featured_media' ] == 0) {
         return $object[ 'featured_media' ];
     }
-	$feat_img_array = wp_get_attachment_image_src( $object[ 'featured_media' ], 'thumbnail', true );
+	$feat_img_array = wp_get_attachment_image_src( $object[ 'featured_media' ], 'large', true );
     return $feat_img_array[0];
 }
+
 function marquis_published_date( $object, $field_name, $request ) {
 	return get_the_time('F j, Y');
 }

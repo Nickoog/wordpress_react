@@ -20,11 +20,11 @@
     </head>
     <body <?php body_class(); ?>>
         <div id="page" class="hfeed site">
-            <div id="content">
+            <!-- <div id="content">
                 <div class="loader-wrapper">
                     <img src="<?php echo home_url() ?>/wp-content/themes/marquis/dist/images/loading-icon.gif" alt="Loader">
                 </div>
-            </div>
+            </div> -->
             <?php wp_footer(); ?>
         </div>			
     </body>

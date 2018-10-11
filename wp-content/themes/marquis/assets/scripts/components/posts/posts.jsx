@@ -1,8 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import PostList from "./post-list";
-import LoadingIcon from "../../loading-icon.gif";
-import Placeholder from "../../placeholder.jpg";
 
 class Posts extends React.Component {
   constructor(props) {
@@ -67,8 +64,6 @@ class Posts extends React.Component {
       })
       .then(function(results) {
         var allPosts = that.state.posts.slice();
-        console.log("postsData", results);
-        console.log("postsData", allPosts);
         results.forEach(function(single) {
           allPosts.push(single);
         });
@@ -98,9 +93,6 @@ class Posts extends React.Component {
   }
 
   render() {
-    if (!this.state.posts.length === 0) {
-      return <img src={LoadingIcon} alt="loader active gif" id="loader" />;
-    }
     return (
       <div>
         <div className="container">

@@ -12,7 +12,7 @@ class Galleries extends React.Component {
             gallery: {},
             loading: true,
         } 
-        this.getMoreGalleries = this.getMoreGalleries.bind(this);
+        this.getGalleries = this.getGalleries.bind(this);
     }
 
     nextGallery = () => {
@@ -31,7 +31,7 @@ class Galleries extends React.Component {
         })
     }
 
-    getMoreGalleries() {
+    getGalleries() {
         var that = this;
         fetch(MarquisSettings.URL.api + "gallery?per_page=100")
             .then(function (response) {        
@@ -51,6 +51,7 @@ class Galleries extends React.Component {
                     gallery: allGalleries[0],
                     loading: false,
                 });
+                console.log(allGalleries);
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
             });
@@ -59,7 +60,7 @@ class Galleries extends React.Component {
 
     componentDidMount() {
         var that = this;
-        that.getMoreGalleries();
+        that.getGalleries();
     }
 
     renderGalleries() {
@@ -72,13 +73,13 @@ class Galleries extends React.Component {
                         className="chevron-wrapper"
                         onClick={() => this.prevGallery()} 
                         disabled={gallery.index === 0}
-                    ><i className="fa fa-chevron-left" aria-hidden="true"></i>
+                    ><i className="fa fa-angle-left" aria-hidden="true"></i>
                     </button>
                     <button
                         className="chevron-wrapper" 
                         onClick={() => this.nextGallery()} 
                         disabled={gallery.index === galleries.length-1}
-                    ><i className="fa fa-chevron-right" aria-hidden="true"></i>
+                    ><i className="fa fa-angle-right" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div className="col">
@@ -87,9 +88,9 @@ class Galleries extends React.Component {
                             className="cards-slider-wrapper" 
                             style={{'transform': `translateX(-${gallery.index*(100/galleries.length)}%)`}}
                         >
-                        {
-                            galleries.map(gallery => <CardGallery key={gallery.id} gallery={gallery} />)
-                        }
+                            {
+                                galleries.map(gallery => <CardGallery key={gallery.id} gallery={gallery} />)
+                            }
                         </div>
                     </div>
                 </div>

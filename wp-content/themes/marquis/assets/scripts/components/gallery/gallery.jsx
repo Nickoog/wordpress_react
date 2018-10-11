@@ -1,22 +1,23 @@
 import React from 'react';
-import NotFound from '../not-found';
-import { Link } from 'react-router-dom';
+import Loader from '../Loader';
 
 class Gallery extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            gallery: {}
+            gallery: {},
         }
+        this.goBack = this.goBack.bind(this);
     }
+    
 
     componentDidMount() {
-        var that = this;
-        var url = window.location.href.split('/');
-        var slug = url.pop() || url.pop();
+        const that = this;
+        const url = window.location.href.split('/');
+        const slug = url.pop() || url.pop();
 
-        fetch(MarquisSettings.URL.api + "gallery/?page=" + this.state.page)
+        fetch(MarquisSettings.URL.api + "gallery?slug=" + slug)
             .then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
@@ -25,39 +26,41 @@ class Gallery extends React.Component {
                 return response.json();
             })
             .then(function (res) {
-                that.setState({ gallery: res[0] })
+                console.log(res);
+                that.setState({ 
+                    gallery: res[0],
+                })
             });
     }
 
-    renderProduct() {
+    goBack(){
+        this.props.history.goBack();
+    }
+
+    renderGallery() {
         return (
-            <div className="card">
-                <div className="card-body">
-                    <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : null} alt={this.state.product.images ? this.state.product.images[0].alt : null } /></div>
-                    <div className="col-sm-8">
-                        <h4 className="card-title">{this.state.product.name}</h4>
-                        <p className="card-text"><strike>${this.state.product.regular_price}</strike> <u>${this.state.product.sale_price}</u></p>
-                        <p className="card-text"><small className="text-muted">{this.state.product.stock_quantity} in stock</small></p>
-                        <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.product.description }} />
-                    </div>
-                </div>
+            <div className="gallery-container">
+                <p
+                    className="card-text"
+                    dangerouslySetInnerHTML={{
+                    __html: this.state.gallery.content.rendered
+                    }}
+                />
             </div>
         );
     }
 
-    renderEmpty() {
+    renderLoader() {
         return (
-            <NotFound />
+            <Loader/>
         );
     }
 
     render() {
         return (
-            <div className="container post-entry">
-                {this.state.product ?
-                    this.renderProduct() :
-                    this.renderEmpty()
-                }
+            <div className="container gallery">
+                <button onClick={this.goBack}>Go Back</button>
+                {this.state.gallery.title ? this.renderGallery() : this.renderLoader()}
             </div>
         );
     }

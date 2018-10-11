@@ -12,7 +12,7 @@ const Header = () => (
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
                         <Link className="nav-item nav-link active" to={MarquisSettings.path} >Home <span className="sr-only">(current)</span></Link>
-                        <Link className="nav-item nav-link" to={MarquisSettings.path + "galleries/"} >Galeries</Link>
+                        <Link className="nav-item nav-link" to={MarquisSettings.path + "gallery/"} >Galeries</Link>
                         <Link className="nav-item nav-link" to={MarquisSettings.path + "politique-de-confidentialite/"} >allo</Link>
                     </div>
                 </div>

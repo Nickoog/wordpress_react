@@ -29,7 +29,7 @@ class PostList extends React.Component {
     }
 
     renderEmpty() {
-        return <img src={LoadingIcon} alt="loader gif" className="active" id="loader" />;
+        return <p>OKOK</p>;
     }
 
     render() {
