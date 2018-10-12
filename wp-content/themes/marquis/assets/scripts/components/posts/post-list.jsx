@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from '../../placeholder.jpg';
-import NotFound from '../not-found';
+import NotFound from '../Not-found';
 import LoadingIcon from "../../loading-icon.gif";
 
 class PostList extends React.Component {
@@ -29,7 +29,7 @@ class PostList extends React.Component {
     }
 
     renderEmpty() {
-        return <img src={LoadingIcon} alt="loader gif" className="active" id="loader" />;
+        return <p>OKOK</p>;
     }
 
     render() {

@@ -25,7 +25,7 @@ if (!dev) {
 
 let config = {
   entry: {
-    app: ['./assets/styles/style.scss','./assets/scripts/index.jsx']
+    app: ['./assets/styles/main.scss','./assets/scripts/index.jsx']
   },
   watch: dev? true : false, 
   output: {
@@ -61,7 +61,7 @@ let config = {
         {
             test: /\.(jpe?g|png|gif|svg)$/i,
             use: [
-                'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://react.test/celestial/wp-content/themes/celestial/dist/images',
+                'file-loader?name=[name].[ext]&outputPath=images/&publicPath=http://react.test/marquis/wp-content/themes/marquis/dist/images',
                 'image-webpack-loader'
             ]
         },

@@ -1,0 +1,19 @@
+@import "common/variables";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400i,500,500i,700,700i,900,900i');
+
+@import "common/global";
+
+// @import "components/header";
+// @import "components/footer";
+// @import "components/page";
+// @import "components/not-found";
+@import "components/loader";
+
+@import "components/gallery/card-gallery";
+@import "components/gallery/gallery";
+@import "components/gallery/galleries";
+
+// @import "components/posts/posts";
+// @import "components/posts/post";
+// @import "components/posts/post-list";

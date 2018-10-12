@@ -1,63 +1,148 @@
 import React from 'react';
-import NotFound from '../not-found';
-import { Link } from 'react-router-dom';
+import Loader from '../Loader';
+import GalleryPhoto from 'react-photo-gallery';
+import Lightbox from 'react-images';
 
 class Gallery extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            product: {}
+            gallery: {},
+            imagesArray: [],
+            currentImage: 0
         }
+        this.goBack = this.goBack.bind(this);
+        this.imageObject = this.imageObject.bind(this);
+        this.closeLightbox = this.closeLightbox.bind(this);
+        this.openLightbox = this.openLightbox.bind(this);
+        this.gotoNext = this.gotoNext.bind(this);
+        this.gotoPrevious = this.gotoPrevious.bind(this);
     }
 
     componentDidMount() {
-        var that = this;
-        var url = window.location.href.split('/');
-        var slug = url.pop() || url.pop();
+        const that = this;
+        that.getGallery();
+    }
+    
+    getGallery () {
+        const that = this;
+        const url = window.location.href.split('/');
+        const slug = url.pop() || url.pop();
 
-        fetch(CelestialSettings.URL.api + "gallery/?page=" + this.state.page)
+        fetch(MarquisSettings.URL.api + "gallery?slug=" + slug)
             .then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                console.log(reponse);
-                //return response.json();
+                //console.log(reponse);
+                return response.json();
             })
             .then(function (res) {
-                that.setState({ product: res[0] })
+                that.setState({ 
+                    gallery: res[0],
+                    imagesArray: that.imageObject(res[0].acf.gallery),
+                })
             });
     }
 
-    renderProduct() {
+    imageObject = (imageArray) => {
+        const that = this;
+        let newArray = [];
+        imageArray.forEach( objetData => {
+            let newObject = {
+                src: objetData.url,
+                width: objetData.width,
+                height: objetData.height,
+            } 
+            newArray.push(newObject);
+        });
+        return newArray;
+    }
+
+    goBack(){
+        this.props.history.goBack();
+    }
+
+    openLightbox(event, obj) {
+        this.setState({
+            currentImage: obj.index,
+            lightboxIsOpen: true,
+        });
+    }
+
+    closeLightbox() {
+        this.setState({
+            currentImage: 0,
+            lightboxIsOpen: false,
+        });
+    }
+
+    gotoPrevious() {
+        this.setState({
+            currentImage: this.state.currentImage - 1,
+        });
+    }
+
+    gotoNext() {
+        this.setState({
+            currentImage: this.state.currentImage + 1,
+        });
+    }
+
+    renderGallery() {
+        const {title, slug, acf, content} = this.state.gallery;
+        const photos = this.state.imagesArray;
+        if (!this.state.gallery.acf.gallery) {
+            return null;
+        }
         return (
-            <div className="card">
-                <div className="card-body">
-                    <div className="col-sm-4"><img className="product-image" src={this.state.product.images ? this.state.product.images[0].src : null} alt={this.state.product.images ? this.state.product.images[0].alt : null } /></div>
-                    <div className="col-sm-8">
-                        <h4 className="card-title">{this.state.product.name}</h4>
-                        <p className="card-text"><strike>${this.state.product.regular_price}</strike> <u>${this.state.product.sale_price}</u></p>
-                        <p className="card-text"><small className="text-muted">{this.state.product.stock_quantity} in stock</small></p>
-                        <p className="card-text" dangerouslySetInnerHTML={{ __html: this.state.product.description }} />
-                    </div>
+            <div 
+                id={`gallery-${slug}`}
+                className="gallery-container"
+            >
+                <div className="title-wrapper">
+                    <h4>{title.rendered}</h4>
                 </div>
+                <div className="content-wrapper">
+                    <p
+                    className="content"
+                    dangerouslySetInnerHTML={{
+                    __html: content.rendered
+                    }}
+                    />
+                </div>
+                <GalleryPhoto 
+                    photos={photos}
+                    onClick={this.openLightbox} 
+                />
+                <Lightbox 
+                    images={photos}
+                    onClose={this.closeLightbox}
+                    onClickPrev={this.gotoPrevious}
+                    onClickNext={this.gotoNext}
+                    currentImage={this.state.currentImage}
+                    isOpen={this.state.lightboxIsOpen}
+                />
             </div>
         );
     }
 
-    renderEmpty() {
+    renderLoader() {
         return (
-            <NotFound />
+            <Loader/>
         );
     }
 
     render() {
         return (
-            <div className="container post-entry">
-                {this.state.product ?
-                    this.renderProduct() :
-                    this.renderEmpty()
-                }
+            <div className="container gallery">
+                <div className="button-wrapper">
+                    <button onClick={this.goBack}>
+                        <i className="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </button>
+                </div>
+                {this.state.gallery.title ? this.renderGallery() : this.renderLoader()}
             </div>
         );
     }

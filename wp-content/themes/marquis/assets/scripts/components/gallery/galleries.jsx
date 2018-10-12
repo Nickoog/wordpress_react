@@ -1,114 +1,101 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import LoadingIcon from '../../loading-icon.gif';
-import Placeholder from '../../placeholder.jpg';
-import NotFound from '../not-found';
+import NotFound from '../Not-found';
+import CardGallery from './CardGallery';
+import Loader from '../Loader';
 
 class Galleries extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            products: [],
-            page: 0,
-            getProducts: true,
-            controller: false
-        }
-        this.getMoreProducts = this.getMoreProducts.bind(this);
+            galleries: [],
+            gallery: {},
+            loading: true,
+        } 
+        this.getGalleries = this.getGalleries.bind(this);
     }
 
-    componentWillUnmount() {
-        this.getMoreProducts = null;
-    }
-
-    componentDidMount() {
+    nextGallery = () => {
         var that = this;
-
-        // init ScrollMagic Controller
-        that.state.controller = new ScrollMagic.Controller();
-
-        // build scene
-        var scene = new ScrollMagic.Scene({ triggerElement: "#colophon", triggerHook: "onEnter" })
-            .addTo(that.state.controller)
-            .on("enter", function (e) {
-                if (that.state.getProducts && that.getMoreProducts !== null) {
-                    that.getMoreProducts();
-                }
-            });
+        const newIndex = this.state.gallery.index+1;
+        this.setState({
+            gallery: that.state.galleries[newIndex]
+        })
+    }
+    
+    prevGallery = () => {
+        var that = this;
+        const newIndex = this.state.gallery.index-1;
+        this.setState({
+            gallery: that.state.galleries[newIndex]
+        })
     }
 
-    getMoreProducts() {
+    getGalleries() {
         var that = this;
-        var totalPages;
-
-        this.setState({ page: this.state.page + 1 });
-
-        fetch(CelestialSettings.URL.api + "gallery/?page=" + this.state.page)
-            .then(function (response) {
-                console.log(response);
-                for (var pair of response.headers.entries()) {
-
-                    // getting the total number of pages
-                    if (pair[0] == 'x-wp-totalpages') {
-                        totalPages = pair[1];
-                        console.log()
-                    }
-
-                    if (that.state.page >= totalPages) {
-                        that.setState({ getProducts: false })
-                    }
-                }
-                if (!response.ok) {
-                    throw Error(response.statusText);
-                }
-                
+        fetch(MarquisSettings.URL.api + "gallery?per_page=100")
+            .then(function (response) {        
                 return response.json();
             })
             .then(function (results) {
-                var allProducts = that.state.products.slice();
+                var allGalleries = that.state.galleries.slice();
+                var index = -1;
                 results.forEach(function (single) {
-                    allProducts.push(single);
+                    index++;
+                    single.index = index;
+                    allGalleries.push(single);
                 })
-                that.setState({ products: allProducts });
-
+                //const middle = Math.floor(allGalleries.length/2);
+                that.setState({ 
+                    galleries: allGalleries,
+                    gallery: allGalleries[0],
+                    loading: false,
+                });
+                console.log(allGalleries);
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
             });
 
     }
 
-    componentDidUpdate() {
-        var fadeInController = new ScrollMagic.Controller();
-        document.querySelectorAll('.container .col-md-4.card-outer').forEach(function (item) {
-            var ourScene2 = new ScrollMagic.Scene({
-                triggerElement: item.children[0],
-                reverse: false,
-                triggerHook: 1
-            })
-                .setClassToggle(item, 'fade-in')
-                .addTo(fadeInController);
-        });
+    componentDidMount() {
+        var that = this;
+        that.getGalleries();
     }
 
-    renderProducts() {
-        return this.state.products.map((product, i) => {
-            return (
-                <div className="col-md-4 card-outer" key={i}>
-                    <div className="card">
-                        <div className="img-outer">
-                            <Link to={product.slug}>
-                                <img className="card-img-top" src={product.images ? product.images[0].src : Placeholder} alt="Featured Image" />
-                            </Link>
-                        </div>
-                        <div className="card-body">
-                            <h4 className="card-title"><Link to={product.slug}>{product.name}</Link></h4>
-                            <p className="card-text"><small className="text-muted">$ {product.price}</small></p>
-                            <p dangerouslySetInnerHTML={{ __html: product.description }} />
+    renderGalleries() {
+        const {galleries, gallery} = this.state;
+        
+        return (
+            <div className="galleries-container">
+                <div className="chevron-container">
+                    <button 
+                        className="chevron-wrapper"
+                        onClick={() => this.prevGallery()} 
+                        disabled={gallery.index === 0}
+                    ><i className="fa fa-angle-left" aria-hidden="true"></i>
+                    </button>
+                    <button
+                        className="chevron-wrapper" 
+                        onClick={() => this.nextGallery()} 
+                        disabled={gallery.index === galleries.length-1}
+                    ><i className="fa fa-angle-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div className="col">
+                    <div className={`cards-slider active-slide-${gallery.index}`}>
+                        <div 
+                            className="cards-slider-wrapper" 
+                            style={{'transform': `translateX(-${gallery.index*(100/galleries.length)}%)`}}
+                        >
+                            {
+                                galleries.map(gallery => <CardGallery key={gallery.id} gallery={gallery} />)
+                            }
                         </div>
                     </div>
                 </div>
-            )
-        });
+            </div>
+        );    
     }
 
     renderEmpty() {
@@ -118,17 +105,20 @@ class Galleries extends React.Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return (
+                <Loader/>
+            )
+        }
         return (
-            <div className="container post-entry">
-                {this.state.products ?
-                    this.renderProducts() :
+            <div className="galleries">
+                {this.state.galleries ?
+                    this.renderGalleries() :
                     this.renderEmpty()
                 }
-                <img src={LoadingIcon} alt="loader active gif" id="loader" />
             </div>
         );
     }
-
 }
 
 export default Galleries;

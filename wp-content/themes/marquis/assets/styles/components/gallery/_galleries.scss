@@ -1,0 +1,94 @@
+.galleries {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    .galleries-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        .chevron-container {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            padding: 0 20px;
+            width: 100%;
+            .chevron-wrapper {
+                cursor: pointer;
+                background: none;
+                border: none;
+                position: relative;
+                z-index: 3;
+                font-size: 55px;
+                text-shadow: $text-shadow-1;
+                color: $gray;
+                transition: color 300ms linear, text-shadow 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+                &:hover {
+                    text-shadow: $text-shadow-0;
+                    color: $silver;
+                }
+            }
+        }
+        .col {
+            min-height: 500px;
+            position: relative;
+            @media screen and (min-width: 1500px) {
+                &:before,
+                &:after {
+                    content: '';
+                    display: block;
+                    width: 25%;
+                    height: 100%;
+                    background: linear-gradient(to right, rgba(34, 40, 46, 1) 15%, rgba(34, 40, 46, 0) 100%);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 2;
+                }
+                &:after {
+                    left: auto;
+                    right: 0;
+                    background: linear-gradient(to left, rgba(34, 40, 46, 1) 15%, rgba(34, 40, 46, 0) 100%);
+                }
+            }
+            @media screen and (max-width: 650px) {
+                min-height: 400px;
+            }
+            .cards-slider {
+                position: relative;
+                max-width: 750px;
+                margin: 0 auto;
+                @media screen and (max-width: 900px) {
+                    max-width: 500px;
+                }
+                @media screen and (max-width: 650px) {
+                    max-width: 250px;
+                }
+                min-height: 500px;
+                .cards-slider-wrapper {
+                    display: flex;
+                    position: absolute;
+                    transition: transform 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+                }
+            }
+        }
+           
+        $i: 0;
+        @for $i from 0 through 29 {
+            .cards-slider.active-slide-#{$i} #card-#{$i} {
+                opacity: 1;
+                transform: scale(1);
+                position: relative;
+                box-shadow: $box-shadow-2;
+                transition: all 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+                &:hover {
+                    box-shadow: $box-shadow-1;
+                }
+                .details {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

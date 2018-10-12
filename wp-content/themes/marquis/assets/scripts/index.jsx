@@ -2,33 +2,30 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Header from './components/header';
-import Footer from './components/footer';
-import Posts from './components/posts/posts';
-import Post from './components/posts/post';
-import Products from './components/gallery/galleries';
-import Product from './components/gallery/gallery';
-import NotFound from './components/not-found';
-import Page from './components/page';
-import LoadingIcon from './loading-icon.gif';
-import Placeholder from './placeholder.jpg';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Posts from './components/posts/Posts';
+import Post from './components/posts/Post';
+import Galleries from './components/gallery/Galleries';
+import Gallery from './components/gallery/Gallery';
+import Page from './components/Page';
 
 // Load the Sass file
 //require('./style.scss');
 
-const App = () => (
+const App = ({ location }) => (
     <div id="page-inner">
         <Header />
-        <div id="content">
-            <Switch>
-                <Route exact path={CelestialSettings.path} component={Posts} />
-                <Route exact path={CelestialSettings.path + 'posts/:slug'} component={Post} />
-                <Route exact path={CelestialSettings.path + 'products'} component={Products} />
-                <Route exact path={CelestialSettings.path + 'products/:product'} component={Product} />
-                <Route exact path={CelestialSettings.path + ':slug'} component={Page} />
-                {/* <Route path="*" component={NotFound} /> */}
-            </Switch>
-        </div>
+            <div id="content">
+                <Switch location={location}>
+                    <Route exact path={MarquisSettings.path} component={Posts} />
+                    <Route exact path={MarquisSettings.path + 'posts/:slug'} component={Post} />
+                    <Route exact path={MarquisSettings.path + 'gallery'} component={Galleries} />
+                    <Route exact path={MarquisSettings.path + 'gallery/:slug'} component={Gallery} />
+                    <Route exact path={MarquisSettings.path + ':slug'} component={Page} />
+                    {/* <Route path="*" component={NotFound} /> */}
+                </Switch>   
+            </div>
         <Footer />
     </div>
 );

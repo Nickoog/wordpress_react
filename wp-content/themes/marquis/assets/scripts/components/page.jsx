@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound from './not-found';
+import NotFound from './Not-found';
 
 class Post extends React.Component {
 
@@ -15,7 +15,7 @@ class Post extends React.Component {
         var url = window.location.href.split('/');
         var slug = url.pop() || url.pop();
 
-        fetch(CelestialSettings.URL.api + "pages?slug=" + slug)
+        fetch(MarquisSettings.URL.api + "pages?slug=" + slug)
             .then(function (response) {
                 if (!response.ok) {
                     throw Error(response.statusText);
