@@ -12,7 +12,7 @@ const CardGallery = ({gallery}) => {
         >
             <Link to={slug}>
                 <div className="details">
-                    <h4>{title.rendered}</h4>
+                    <h3>{title.rendered}</h3>
                 </div>
             </Link>
         </div>

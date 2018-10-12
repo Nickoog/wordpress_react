@@ -2,13 +2,13 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Header from './components/header';
-import Footer from './components/footer';
-import Posts from './components/posts/posts';
-import Post from './components/posts/post';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Posts from './components/posts/Posts';
+import Post from './components/posts/Post';
 import Galleries from './components/gallery/Galleries';
 import Gallery from './components/gallery/Gallery';
-import Page from './components/page';
+import Page from './components/Page';
 
 // Load the Sass file
 //require('./style.scss');

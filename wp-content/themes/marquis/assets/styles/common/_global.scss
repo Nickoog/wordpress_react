@@ -3,10 +3,15 @@ body {
     font-size: 16px;
     letter-spacing: 0.5px;
     font-weight: $regular;
+    background-color: $background-color;
+    color: $gray;
     #content {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+    }
+    button:focus {
+        outline: 0;
     }
 }
 

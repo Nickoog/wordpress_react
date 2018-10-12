@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound from './not-found';
+import NotFound from './Not-found';
 
 class Post extends React.Component {
 

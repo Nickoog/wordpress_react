@@ -11,6 +11,13 @@
     background-position: center;
     background-color: #cccccc;
     box-shadow: $box-shadow-1;
+    @media screen and (max-width: 900px) {
+        min-width: 500px;
+    }
+    @media screen and (max-width: 650px) {
+        min-width: 250px;
+        min-height: 400px;
+    }
     cursor: pointer;
     a {
         width: 100%;
@@ -23,11 +30,18 @@
             align-items: center;
             position: relative;
             height: 100%;
+            opacity: 0;
             overflow: hidden;
             padding: 15px;
             text-align: center;
             color: $light-gray;
             text-shadow: $text-shadow-0;
+            transition: opacity 300ms linear;
+            @media screen and (max-width: 650px) {
+                h3 {
+                    font-size: 30px;
+                }
+            }
         }
     }
 }

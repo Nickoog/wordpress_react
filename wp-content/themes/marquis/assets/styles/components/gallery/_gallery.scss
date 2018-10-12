@@ -1,5 +1,39 @@
 .gallery {
     display: flex;
     flex-direction: column;
-    flex-grow: 1
+    flex-grow: 1;
+    .button-wrapper {
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            left: 0;
+            top: 50%;
+            margin-left: 30px;
+            color: $gray;
+            font-size: 55px;
+            &:focus {
+                outline: 0;
+            }  
+        }
+    }
+    .gallery-container {
+        
+        .title-wrapper {
+
+        }
+        .content-wrapper {
+
+        }
+        .image-container {
+            .image-wrapper {
+                margin-bottom: 15px;
+                box-shadow: $box-shadow-2;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
