@@ -9,7 +9,7 @@
         justify-content: space-around;
         align-items: center;
         padding: 0 50px;
-        background-color: $background-color;
+        background-color: $background-opacity;
         .logo-wrapper {
             display: flex;
             justify-content: flex-start;
@@ -68,6 +68,9 @@
                 font-size: 25px;
                 .fa {
                     color: $gray;
+                    &:hover {
+                        color: $gray-opacity;
+                    }
                 }
             }
         }

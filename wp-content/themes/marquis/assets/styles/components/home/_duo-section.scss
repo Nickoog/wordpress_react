@@ -1,0 +1,17 @@
+.duo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $gray;
+    min-height: 30rem;
+    .content-container {
+        width: 50%;
+        color: $background-color;
+    }
+    .image-wrapper {
+        width: 50%;
+        img {
+            width: 100%;
+        }
+    }
+}

@@ -28,13 +28,13 @@ class Header extends React.Component {
             <header id="masthead" className="header" role="banner">
                 <nav>
                     <div className="logo-wrapper">
-                        <h1 className="site-title"><Link to={MarquisSettings.path} >Marquis</Link></h1>
+                        <h1 className="site-title"><Link to={MarquisSettings.path}>Marquis</Link></h1>
                     </div>
                     <div className="link-container">
-                        <NavLink className="nav-link" activeClassName="active" to={MarquisSettings.path + "/"}>Home</NavLink>
+                        <NavLink className="nav-link" exact activeClassName="active" to={MarquisSettings.path}>Home</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to={MarquisSettings.path + "gallery/"} >Galeries</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to={MarquisSettings.path + "posts/"} >Blogue <span className="sr-only">(current)</span></NavLink>
-                        <NavLink className="nav-link" activeClassName="active" to={MarquisSettings.path + "politique-de-confidentialite/"} >Contact</NavLink>
+                        <NavLink className="nav-link" activeClassName="current" to={MarquisSettings.path + "politique-de-confidentialite/"} >Contact</NavLink>
                     </div>
                     <div className="social-container">
                         <div className="icon-wrapper">
@@ -58,9 +58,9 @@ class Header extends React.Component {
                     </div>
                 </nav>
                 <div className="mobilLinks">
-                    <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path} >Home</Link>
+                    <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path} >Home <span className="sr-only">(current)</span></Link>
                     <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path + "gallery/"} >Galeries</Link>
-                    <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path + "posts/"} >Blogue <span className="sr-only">(current)</span></Link>
+                    <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path + "posts/"} >Blogue</Link>
                     <Link className="nav-link" onClick={this.burgerToggle} to={MarquisSettings.path + "politique-de-confidentialite/"} >Contact</Link>
                 </div>
             </header>         
