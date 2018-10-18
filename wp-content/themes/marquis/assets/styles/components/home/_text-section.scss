@@ -1,0 +1,12 @@
+.text-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding : 5rem 1rem;
+        background-color: $background-color;
+        min-height: 30rem;
+        .content-container {
+            max-width: 50rem;
+            color: $gray;
+        }
+}

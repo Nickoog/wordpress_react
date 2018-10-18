@@ -1,0 +1,33 @@
+.slick-slider {
+    .slick-prev {
+        left: 10px;
+        z-index: 1;
+    }
+    .slick-next {
+        right: 10px;
+    }
+    .slick-list {
+        .slick-track {
+            .slick-slide {
+                .banner-wrapper {
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    .slick-dots {
+        bottom: 15px;
+        li,
+        .slick-active {
+            button:before {
+                color: $gray;
+            }
+        }
+    }
+}

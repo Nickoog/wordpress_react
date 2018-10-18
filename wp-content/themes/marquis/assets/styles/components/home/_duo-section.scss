@@ -1,0 +1,54 @@
+.duo-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $gray;
+    .animated {
+        width: 50%;
+        .cta-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: $background-color;
+            padding: 0 1.5rem;
+            .cta-content {
+    
+            }
+            .button-wrapper {
+                display: flex;
+                justify-content: center;
+                padding-top: 3rem; 
+                .cta-button {
+                    background-color: $blue;
+                    color: $gray;
+                    padding: .8rem 1rem;
+                    border: 1px solid $blue;
+                    box-shadow: $box-shadow-1;
+                    transition: all 300ms linear;
+                    &:hover {
+                        background-color: $gray;
+                        color: $blue;
+                    }
+                }
+            }
+        }
+    }
+    .image-wrapper {
+        width: 50%;
+        img {
+            width: 100%;
+        }
+    }
+    @media screen and (max-width: 900px) {
+        .cta-container {
+            flex: 0 0 100%;
+            min-height: 30rem;
+        }
+        .image-wrapper {
+            flex: 0 0 100%;
+            order: -1 !important;
+        }
+    }
+}
