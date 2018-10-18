@@ -11,6 +11,8 @@ import Galleries from './components/gallery/Galleries';
 import Gallery from './components/gallery/Gallery';
 import Page from './components/Page';
 
+import "animate.css/animate.min.css";
+
 const App = () => (
     <div id="page-inner">
         <Header />

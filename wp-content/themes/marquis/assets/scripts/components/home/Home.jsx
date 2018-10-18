@@ -17,7 +17,7 @@ class Home extends React.Component {
     }
 
     getHome() {
-        var that = this;
+        const that = this;
         fetch(MarquisSettings.URL.api + "pages?slug=home")
             .then(function (response) {        
                 return response.json();
@@ -35,12 +35,13 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
-        var that = this;
+        const that = this;
         that.getHome();
     }
 
     renderHome() {
         const { carousel } = this.state.acf;
+        const { section_duo } = this.state.acf;
         const { acf } = this.state;
         const settings = {
             dots: true,
@@ -61,7 +62,7 @@ class Home extends React.Component {
                     }
                 </Slider>
                 <TextSection content={acf} />
-                <DuoSection content={acf} />
+                {section_duo.map((section, index) => <DuoSection key={index} section={section} />)}
             </div>
         );    
     }

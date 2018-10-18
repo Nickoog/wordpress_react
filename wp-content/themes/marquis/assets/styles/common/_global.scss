@@ -11,8 +11,15 @@ body {
         flex-grow: 1;
         //padding-top: 110px;
     }
-    button:focus {
-        outline: 0;
+    button{
+        &:focus {
+            outline: 0;
+        }
+    }
+    a{
+        &:hover {
+            text-decoration: none;
+        }
     }
 }
 
