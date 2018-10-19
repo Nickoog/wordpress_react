@@ -5,7 +5,9 @@ const Banner = ({image}) => (
         className="banner-wrapper"
         style={{'backgroundImage': `url(${image.url}`}}
     >
-        <ScrollAnimation animateIn='zoomInDown' animateOut='fadeOut'>
+        <ScrollAnimation 
+            animateIn='zoomInDown' 
+            animateOut='fadeOut'>
             <h1>Logo</h1>
         </ScrollAnimation>
     </div>

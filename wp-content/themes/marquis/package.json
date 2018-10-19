@@ -39,6 +39,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "react": "^16.5.2",
+    "react-animate-on-scroll": "^2.1.5",
     "react-dom": "^16.5.2",
     "react-images": "0.5.19",
     "react-lightbox-component": "^1.2.1",
@@ -46,7 +47,6 @@
     "react-photo-gallery": "6.2.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-slick": "^0.23.1",
     "slick-carousel": "^1.8.1"
   }
 }

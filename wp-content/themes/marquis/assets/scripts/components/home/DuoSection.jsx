@@ -10,7 +10,9 @@ const DuoSection = ({ section, index}) => {
     position_image === '-1'? settings = 'bounceInRight': settings = 'bounceInLeft';
     return (
         <div className="duo-section">
-            <ScrollAnimation animateIn={settings} animateOut='fadeOut'>
+            <ScrollAnimation 
+                animateIn={settings} 
+                animateOut='fadeOut'>
                 <div 
                 className="cta-container"
                 >
