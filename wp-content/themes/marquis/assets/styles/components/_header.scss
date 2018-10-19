@@ -1,7 +1,12 @@
-.header {
+$header-height: 113px;
+
+#header {
     position: fixed;
+    top: 0;
     z-index: 10;
+    transition: top 100ms ease-in-out;
     width: 100%;
+    height: $header-height;
     nav {
         position: relative;
         z-index: 12;
@@ -139,5 +144,12 @@
         .nav-link {
             padding: .5rem 3.8rem;
         }
+    }
+}
+
+.nav-up {
+    top: -($header-height + 1px + 5px) !important;
+    .mobilLinks {
+        transform: translateY(-160px) !important;
     }
 }

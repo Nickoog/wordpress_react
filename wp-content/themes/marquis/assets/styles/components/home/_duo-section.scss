@@ -42,9 +42,12 @@
         }
     }
     @media screen and (max-width: 900px) {
-        .cta-container {
-            flex: 0 0 100%;
-            min-height: 30rem;
+        .animated {
+            width: 100%;
+            .cta-container {
+                flex: 0 0 100%;
+                min-height: 30rem;
+            }
         }
         .image-wrapper {
             flex: 0 0 100%;

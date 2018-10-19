@@ -3,7 +3,9 @@ import ScrollAnimation from 'react-animate-on-scroll';
 
 const TextSection = ({ content }) => (
     <div className="text-section">
-        <ScrollAnimation animateIn='fadeIn' animateOut='fadeOut'>
+        <ScrollAnimation 
+            animateIn='fadeIn'
+            animateOut='fadeOut'>
             <div
             className="content-container"
             dangerouslySetInnerHTML={{
