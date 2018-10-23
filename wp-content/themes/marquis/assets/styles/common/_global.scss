@@ -1,24 +1,32 @@
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: $roboto;
     font-size: 16px;
     letter-spacing: 0.5px;
     font-weight: $regular;
     background-color: $background-color;
     color: $gray;
-    #content {
+    #page-inner {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
-        //padding-top: 110px;
-    }
-    button{
-        &:focus {
-            outline: 0;
+        min-height: 100vh;
+        #content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            //padding-top: 110px;
         }
-    }
-    a{
-        &:hover {
-            text-decoration: none;
+        button{
+            &:focus {
+                outline: 0;
+            }
+        }
+        a{
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
 }
@@ -63,104 +71,4 @@ h6 {
     font-size: 20px;
     letter-spacing: 0.15px;
     font-weight: $medium;
-}
-
-.posts-title, .navbar {
-    padding-left: 1rem;
-}
-
-.navbar {
-    border-bottom: 1px solid #eaeaea;
-}
-
-.site-content-contain {
-    background-color: transparent !important;
-    margin-top: 60px;
-}
-.site-content-contain #content, .navigation-top {
-    background-color: #fff;
-    width: 75%;
-    margin: 0 auto;
-}
-@media screen and (min-width: 48em) {
-    .site-content {
-        padding: 2.5em 0 0;
-    }
-}
-
-.aseel-front-page.has-header-image .custom-header-media,
-.aseel-front-page.has-header-video .custom-header-media,
-.home.blog.has-header-image .custom-header-media,
-.home.blog.has-header-video .custom-header-media {
-	height: 25vh !important;
-}
-
-#primary #main .post {
-    clear: left;
-    float: left;
-    width: 100%;
-}
-
-.post-excerpt {
-    background: red;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-img#loader {
-    clear: both;
-    margin: 0 auto;
-}
-#loader {
-    text-align: center;
-    display: none;
-}
-#loader.active {
-    display: block;
-}
-.loader-gif {
-    text-align: center;
-    margin-top: 10em;
-}
-
-.post-entry {
-    padding-top: 1em;
-}
-
-.col-md-4.card-outer {
-    float: left;
-    padding-top: 0.8em;
-    padding-bottom: 0.8em;
-}
-
-.col-md-4.card-outer .card {
-    height: 520px;
-}
-
-.img-outer {
-    max-height: 250px;
-    overflow: hidden;
-}
-
-#posts-here {
-    position: fixed;
-    bottom: 10px;
-}
-
-.card-outer {
-    opacity: 0;
-    transform: translateY(100px);
-    transition: all 0.5s ease-out;
-}
-.card-outer.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.card-body div {
-    float: left;
-}
-
-img.product-image, img.featured-image {
-    width: 100%;
 }

@@ -21,7 +21,8 @@ function marquis_scripts() {
     // Load scripts
 	//wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.2.1.slim.min.js', '20171006', false );	
 	wp_enqueue_script('lodash', 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js', array(), false, false );
-	wp_enqueue_script( 'scrollmagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js' , array( 'jquery' ), '1.0', false );    
+    wp_enqueue_script( 'scrollmagic', 'https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js' , array( 'jquery' ), '1.0', false );
+    wp_enqueue_script( 'animate.css',  'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css', array() , false, false); 
 	//wp_enqueue_script( 'popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js', array( 'jquery' ), '20171006', false );
     //wp_enqueue_script( 'bootstrap-script', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js', array( 'jquery' ), '20171006', false );
     

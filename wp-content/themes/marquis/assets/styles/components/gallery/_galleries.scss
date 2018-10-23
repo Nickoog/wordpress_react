@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
+    padding-top: 150px;
     .galleries-container {
         display: flex;
         flex-direction: column;
@@ -11,7 +12,7 @@
             display: flex;
             justify-content: space-between;
             position: absolute;
-            top: 50%;
+            top: 45%;
             padding: 0 20px;
             width: 100%;
             .chevron-wrapper {

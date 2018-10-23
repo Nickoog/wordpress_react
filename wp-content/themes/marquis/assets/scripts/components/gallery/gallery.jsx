@@ -9,7 +9,7 @@ class Gallery extends React.Component {
         super(props);
         this.state = {
             gallery: {},
-            imagesArray: [],
+            //imagesArray: [],
             currentImage: 0
         }
         this.goBack = this.goBack.bind(this);
@@ -35,29 +35,29 @@ class Gallery extends React.Component {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                //console.log(reponse);
                 return response.json();
             })
             .then(function (res) {
                 that.setState({ 
                     gallery: res[0],
-                    imagesArray: that.imageObject(res[0].acf.gallery),
                 })
             });
     }
 
     imageObject = (imageArray) => {
-        const that = this;
-        let newArray = [];
-        imageArray.forEach( objetData => {
-            let newObject = {
-                src: objetData.url,
-                width: objetData.width,
-                height: objetData.height,
-            } 
-            newArray.push(newObject);
-        });
-        return newArray;
+        const newArray = [];
+        if (imageArray !== null) {
+            imageArray.forEach( objetData => {
+                const newObject = {
+                    src: objetData.url,
+                    width: objetData.width,
+                    height: objetData.height,
+                } 
+                newArray.push(newObject);
+            });
+            return newArray;
+        }
+        return
     }
 
     goBack(){
@@ -92,8 +92,8 @@ class Gallery extends React.Component {
 
     renderGallery() {
         const {title, slug, acf, content} = this.state.gallery;
-        const photos = this.state.imagesArray;
-        if (!this.state.gallery.acf.gallery) {
+        const photos = this.imageObject(this.state.gallery.acf.gallery);
+        if (!photos) {
             return null;
         }
         return (

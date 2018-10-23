@@ -27,7 +27,7 @@ let config = {
   entry: {
     app: ['./assets/styles/main.scss','./assets/scripts/index.jsx']
   },
-  watch: dev? true : false, 
+  watch: dev ? true : false, 
   output: {
     path: path.resolve('./dist'),
     filename: dev? '[name].js' : '[name].[chunkhash:8].js',
