@@ -1,4 +1,3 @@
-// External dependencies
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from '../../placeholder.jpg';
@@ -36,7 +35,7 @@ class PostList extends React.Component {
         });
     }
 
-    renderEmpty() {
+    renderLoader() {
         return <Loader/>;
     }
 
@@ -49,7 +48,7 @@ class PostList extends React.Component {
             <div className="row">
                 {this.props.posts.length ?
                     this.renderPosts() :
-                    this.renderEmpty()
+                    this.renderLoader()
                 }
             </div>
         );
