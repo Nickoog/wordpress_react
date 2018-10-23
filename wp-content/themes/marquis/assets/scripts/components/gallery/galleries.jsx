@@ -45,13 +45,11 @@ class Galleries extends React.Component {
                     single.index = index;
                     allGalleries.push(single);
                 })
-                //const middle = Math.floor(allGalleries.length/2);
                 that.setState({ 
                     galleries: allGalleries,
                     gallery: allGalleries[0],
                     loading: false,
                 });
-                console.log(allGalleries);
             }).catch(function (error) {
                 console.log('There has been a problem with your fetch operation: ' + error.message);
             });

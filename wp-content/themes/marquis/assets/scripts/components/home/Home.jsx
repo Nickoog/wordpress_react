@@ -46,7 +46,7 @@ class Home extends React.Component {
         const settings = {
             dots: true,
             infinite: true,
-            lazyLoad:true,
+            lazyLoad: true,
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,

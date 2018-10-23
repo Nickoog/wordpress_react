@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding-top: 150px;
     .button-wrapper {
         button {
             background: none;
@@ -9,7 +10,7 @@
             cursor: pointer;
             position: fixed;
             left: 0;
-            top: 50%;
+            top: 45%;
             margin-left: 30px;
             color: $gray;
             font-size: 55px;
