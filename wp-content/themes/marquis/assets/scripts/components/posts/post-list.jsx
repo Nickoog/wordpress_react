@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Placeholder from '../../placeholder.jpg';
-import NotFound from '../Not-found';
+import Loader from '../Loader';
 import LoadingIcon from "../../loading-icon.gif";
 
 class PostList extends React.Component {
@@ -10,18 +10,26 @@ class PostList extends React.Component {
     renderPosts() {
         return this.props.posts.map((post, i) => {
             return (
-                <div className="col-md-4 card-outer" key={i}>
-                    <div className="card">
-                        <div className="img-outer">
-                            <Link to={'posts/' + post.slug}>
-                                <img className="card-img-top" src={post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
-                            </Link>
-                        </div>
-                        <div className="card-body">
-                            <h4 className="card-title"><Link to={'posts/' + post.slug}>{post.title.rendered}</Link></h4>
-                            <p className="card-text"><small className="text-muted">{post.author_name} &ndash; {post.published_date}</small></p>
-                            <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-                        </div>
+                <div className="col-lg-4 col-md-6 card-outer" key={i}>
+                    <div 
+                        className="post-card"
+                        style={{'backgroundImage': `url(${post.featured_image_src}`}}>
+                        <Link to={post.slug}>
+                            <div className="card-body">
+                                <h4 className="card-title">
+                                    {post.title.rendered}
+                                </h4>
+                                <p className="card-text">
+                                    <small>
+                                        {post.author_name} &ndash; {post.published_date}
+                                    </small>
+                                </p>
+                                <div
+                                    className="card-content" 
+                                    dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                                />
+                            </div>
+                        </Link>
                     </div>
                 </div>
             )
@@ -29,7 +37,7 @@ class PostList extends React.Component {
     }
 
     renderEmpty() {
-        return <p>OKOK</p>;
+        return <Loader/>;
     }
 
     render() {
@@ -38,7 +46,7 @@ class PostList extends React.Component {
         }
 
         return (
-            <div className="posts-container">
+            <div className="row">
                 {this.props.posts.length ?
                     this.renderPosts() :
                     this.renderEmpty()

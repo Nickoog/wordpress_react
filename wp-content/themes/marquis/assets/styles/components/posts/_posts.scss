@@ -1,0 +1,13 @@
+.posts {
+    display: flex;
+    flex-grow: 1;
+    padding-top: 150px;
+    .posts-title {
+
+    }
+    .posts-container {
+        display: flex;
+        justify-content: center;
+        flex-grow: 1;
+    }
+}
