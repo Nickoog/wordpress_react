@@ -1,47 +1,87 @@
-// External dependencies
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Placeholder from '../../placeholder.jpg';
-import NotFound from '../Not-found';
-import LoadingIcon from "../../loading-icon.gif";
+import Loader from '../Loader';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class PostList extends React.Component {
-
+    // componentDidMount() {
+    //     window.addEventListener('scroll', this.onScroll, false);
+    // }
+    
+    // componentWillUnmount() {
+    //     window.removeEventListener('scroll', this.onScroll, false);
+    // }
+    
+    // onScroll = () => {
+    //     console.log(this.props.posts.length);
+    //     if (
+    //       (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
+    //       this.props.posts.length
+    //     ) {
+    //       this.props.onPaginatedSearch();
+    //     }
+    // }
     renderPosts() {
         return this.props.posts.map((post, i) => {
             return (
-                <div className="col-md-4 card-outer" key={i}>
-                    <div className="card">
-                        <div className="img-outer">
-                            <Link to={'posts/' + post.slug}>
-                                <img className="card-img-top" src={post.featured_image_src ? post.featured_image_src : Placeholder} alt="Featured Image" />
+                <div className="col-lg-4 col-md-6 card-outer" key={i}>
+                    <ScrollAnimation
+                        animateIn='fadeInUp'
+                        animateOnce={true}>
+                        <div 
+                            className="post-card"
+                            style={{'backgroundImage': `url(${post.featured_image_src}`}}>
+                            <Link to={post.slug}>
+                                <div className="card-body">
+                                    <h4 className="card-title">
+                                        {post.title.rendered}
+                                    </h4>
+                                    <p className="card-text">
+                                        <small>
+                                            {post.author_name} &ndash; {post.published_date}
+                                        </small>
+                                    </p>
+                                    {/* <div
+                                        className="card-content" 
+                                        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                                    /> */}
+                                </div>
                             </Link>
                         </div>
-                        <div className="card-body">
-                            <h4 className="card-title"><Link to={'posts/' + post.slug}>{post.title.rendered}</Link></h4>
-                            <p className="card-text"><small className="text-muted">{post.author_name} &ndash; {post.published_date}</small></p>
-                            <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-                        </div>
-                    </div>
+                    </ScrollAnimation>
                 </div>
             )
         });
     }
 
-    renderEmpty() {
-        return <p>OKOK</p>;
+    renderLoader() {
+        return <Loader/>;
     }
 
     render() {
+    
         if (!this.props.posts) {
             return null;
         }
 
         return (
-            <div className="posts-container">
-                {this.props.posts.length ?
-                    this.renderPosts() :
-                    this.renderEmpty()
+            <div>
+                <div className="row">
+                    {this.props.posts.length ?
+                        this.renderPosts() :
+                        this.renderLoader()
+                    }
+                </div>
+                {
+                    this.props.page < this.props.totalPages &&
+                    <div className="button-wrapper">
+                        <button
+                            type="button"
+                            onClick={this.props.onPaginatedSearch}
+                        >
+                            More
+                        </button>
+                    </div>
                 }
             </div>
         );

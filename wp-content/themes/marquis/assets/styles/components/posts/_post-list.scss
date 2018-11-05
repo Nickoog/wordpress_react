@@ -1,0 +1,53 @@
+.card-outer {
+    height: 500px;
+    margin-bottom: 1.5rem;
+    .animated {
+        height: 100%;
+        .post-card {
+            background-color: $silver;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 100%;
+            &::after {
+                content: "";
+                background-color: $blue-background-opacity;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 5px;
+                transition: height 150ms linear;
+            }
+            &:hover {
+                &::after {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .card-body {
+                position: relative;
+                z-index: 1;
+                background-color: $filter-color;
+                color: $light-gray;
+                box-shadow: $box-shadow-2;
+                height: 100%;
+                transition: box-shadow 150ms linear;
+                &:hover {
+                    box-shadow: $box-shadow-0;
+                }
+                .card-title {
+                }
+                .card-text {
+                    color: $silver;
+                }
+                .card-content {
+                    height: 100%;
+                    p {
+                        height: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
