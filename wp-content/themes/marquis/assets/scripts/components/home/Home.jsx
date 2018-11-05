@@ -63,7 +63,7 @@ class Home extends React.Component {
                     }
                 </Slider>
                 <TextSection content={acf} />
-                {section_duo.map((section, index) => <DuoSection key={index} section={section} />)}
+                {section_duo.map((section, i) => <DuoSection key={i} section={section} />)}
             </div>
         );    
     }

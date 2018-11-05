@@ -9,5 +9,8 @@
         display: flex;
         justify-content: center;
         flex-grow: 1;
+        .row {
+            height: 100%;
+        }
     }
 }

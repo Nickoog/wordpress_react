@@ -2,11 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ScrollAnimation from 'react-animate-on-scroll';
 
-
-
 const DuoSection = ({ section, index}) => {
+    let settings;
     const {text_duo, image_duo, link, position_image, button_text} = section;
-    let settings = '';
     position_image === '-1'? settings = 'bounceInRight': settings = 'bounceInLeft';
     return (
         <div className="duo-section">
