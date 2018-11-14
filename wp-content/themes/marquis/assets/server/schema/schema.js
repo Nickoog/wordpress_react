@@ -1,4 +1,3 @@
-const graphql = require('graphql');
 const fetch = require('node-fetch');
 
 const {
@@ -8,7 +7,7 @@ const {
     GraphQLID,
     GraphQLInt,
     GraphQLList
-} = graphql;
+} = require('graphql');
 
 const MenuType = new GraphQLObjectType({
     name: 'Menu',
@@ -67,6 +66,22 @@ const AcfGalleryType = new GraphQLObjectType({
     })
 });
 
+const fetchPosts = (posts, num) =>
+    fetch(`http://react.test/wp-json/wp/v2/${posts}/?per_page=${num}`)
+    .then(response => response.json())
+
+const fetchPost = (post, id) =>
+    fetch(`http://react.test/wp-json/wp/v2/${post}/${id}`)
+    .then(response => response.json())
+
+const fetchPagination = (posts, num, page) =>
+    fetch(`http://react.test/wp-json/wp/v2/${posts}/?per_page=${num}&page=${page}`)
+    .then(response => response.json())
+
+const fetchMenu = (id) =>
+    fetch(`http://react.test/wp-json/wp-api-menus/v2/menus/${id}`)
+    .then(response => response.json())
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -76,10 +91,7 @@ const RootQuery = new GraphQLObjectType({
                 id: { type: GraphQLID },
                 post: { type: GraphQLString } 
             },
-            resolve: (root, args) => fetch(
-                `http://react.test/wp-json/wp/v2/${args.post}/${args.id}`
-            )
-            .then(res => res.json())
+            resolve: (root, args) => fetchPost(args.post, args.id)
         },
         posts: {
             type: new GraphQLList(PostType),
@@ -87,10 +99,7 @@ const RootQuery = new GraphQLObjectType({
                 posts: {type: GraphQLString },
                 num: { type: GraphQLInt },
             },
-            resolve: (root, args) => fetch(
-                `http://react.test/wp-json/wp/v2/${args.posts}/?per_page=${args.num}`
-            )
-            .then(res => res.json())
+            resolve: (root, args) => fetchPosts(args.posts, args.num)
         },
         pagination: {
             type: new GraphQLList(PostType),
@@ -99,18 +108,12 @@ const RootQuery = new GraphQLObjectType({
                 num: { type: GraphQLInt },
                 page: { type: GraphQLInt }
             },
-            resolve: (root, args) => fetch(
-                `http://react.test/wp-json/wp/v2/${args.posts}/?per_page=${args.num}&page=${args.page}`
-            )
-            .then(res => res.json())
+            resolve: (root, args) => fetchPagination(args.posts, args.num, args.page)
         },
         menus: {
             type: MenuType,
             args: { id: { type: GraphQLID } },
-            resolve: (root, args) => fetch(
-                `http://react.test/wp-json/wp-api-menus/v2/menus/${args.id}`
-            )
-            .then(res => res.json())
+            resolve: (root, args) => fetchMenu(args,id)
         }
     }
 });

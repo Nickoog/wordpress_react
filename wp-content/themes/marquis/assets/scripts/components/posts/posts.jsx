@@ -1,76 +1,58 @@
 import React, { Component } from 'react';
 import { gql } from 'apollo-boost';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 
 //components
-import PostList from "./Post-list";
+import PostCard from "./Post-card";
+import Loader from '../Loader';
 
 let totalPages;
-
-const getPostsQuery = gql`
-    {
-        posts(posts:"gallery",num:5){
-            id
-            title
-        } 
-    }
+// 
+const GET_POSTS_QUERY = gql`
+    query GetPosts($posts: String, $num: Int)
+        {
+            posts(posts:$posts, num:$num){
+                id
+                slug
+                author_name
+                published_date
+                featured_image_src
+                title
+            } 
+        }
+        
 `;
-
+// {
+//     this.props.page < this.props.totalPages &&
+//     <div className="button-wrapper">
+//         <button
+//             type="button"
+//             onClick={this.props.onPaginatedSearch}
+//         >
+//             More
+//         </button>
+//     </div>
+// }
 class Posts extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            posts: [],
+            posts: 'posts',
+            num: 5,
             page: 1,
         };
     }
+
     displayPosts(){
-        let data = this.props.data;
-        console.log(data)
+        let { data } = this.props;
+        console.log(this.props);
         if(data.loading){
-            return( <div>Loading posts...</div> );
+            return( <Loader /> );
         } else {
-            return data.posts.map(post => {
-                return(
-                    <li key={ post.id }>{ post.title }</li>
-                );
-            })
+            return data.posts.map(post => <PostCard key={post.id} post={post} />)
         }
     }
-    // componentDidMount() {
-    //     window.onbeforeunload = function () {
-    //         window.scrollTo(0, 0);
-    //     };
-    //     this.fetchPosts(this.state.page)
-    // }
-
-    // fetchPosts = (page) => {
-    //     fetch(getPostsUrl(page))
-    //         .then(response => {
-    //             for (const pair of response.headers.entries()) {
-    //                 // getting the total number of pages
-    //                 pair[0] === "x-wp-totalpages" ? 
-    //                     totalPages = pair[1]: null;
-
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(result => {
-    //             let allPosts = this.state.posts.slice();
-    //             result.forEach(function (single) {
-    //                 allPosts.push(single);
-    //             });
-    //             this.setState({
-    //                 posts: allPosts,
-    //                 page: page
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.log(
-    //             "There has been a problem with your fetch operation: " + error.message
-    //             );
-    //         });
-    // }
 
     onPaginatedSearch = (e) => 
         this.fetchPosts(this.state.page + 1);
@@ -78,21 +60,22 @@ class Posts extends React.Component {
 
     render() {
         return (
-        <div className="posts container">
-            <div className="posts-container">
-                <ul>
-                    { this.displayPosts() }
-                </ul>
-                {/* <PostList 
-                    posts={this.state.posts}
-                    page={this.state.page}
-                    totalPages={totalPages}
-                    onPaginatedSearch={this.onPaginatedSearch} /> */}
+            <div className="posts container">
+                <div className="posts-container">
+                    <div className="row">
+                        { this.displayPosts() }
+                    </div>
+                </div>
             </div>
-        </div>
         );
     }
 }
 
-export default graphql(getPostsQuery)(Posts);
-
+export default graphql(GET_POSTS_QUERY, {
+    options: {
+        variables: {
+            posts: "posts",
+            num: 2
+        }
+    }
+})(Posts);
