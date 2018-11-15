@@ -1,5 +1,4 @@
 import React from "react";
-import LoadingIcon from "../../loading-icon.gif";
 
 class Post extends React.Component {
   constructor(props) {

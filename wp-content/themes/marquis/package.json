@@ -38,16 +38,19 @@
   },
   "dependencies": {
     "animate.css": "^3.7.0",
-    "react": "^16.5.2",
+    "react": "^16.6.0",
     "react-animate-on-scroll": "^2.1.5",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.6.0",
     "react-images": "0.5.19",
     "react-lightbox-component": "^1.2.1",
     "react-parallax": "^2.0.0",
     "react-photo-gallery": "6.2.0",
+    "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-slick": "^0.23.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1"
   }
 }
